@@ -1,0 +1,22 @@
+{
+	"name": "XTTT-node-socket",
+	"description": "X Tic Tac Toe game demo server with Node.js, Express, and Socket.io",
+	"version": "0.0.1",
+	"author": "Maxim Shklyar, kisla interactive, <maxim@kisla.com>",
+	"private": true,
+	"license": "",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/xims/X-ttt.git"
+	},
+	"main": "Xttt.js",
+	"scripts": {
+		"start": "node Xttt.js",
+		"start:forever": "forever start -o /var/www/socket/logs/out.log -e /var/www/socket/logs/err.log -a /var/www/socket/quiz.js",
+		"start:forever_win": "forever -c node -l logs/forever.log -o logs/out.log -e logs/err.log -a quiz.js"
+	},
+	"dependencies": {
+		"express": "^4.14.0",
+		"socket.io": "^1.4.8"
+	}
+}

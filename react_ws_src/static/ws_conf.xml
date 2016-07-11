@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+
+	<site>
+		<vals
+				year="2016"
+				author="kisla interactive"
+			/>
+	</site>
+
+<!--
+	========================	========================	========================
+-->
+
+	<conf>
+		<ga_acc		an="UA-379313-17"		/>
+	</conf>
+
+<!--	========================	========================	========================	-->
+
+	<loc>
+		<__SCRIPT_ROOT				u='http://z2/projs/kisla/X-react-starter/dev/WS/'	/>
+		<SCRIPT_ROOT				u='http://Xttt.kisla.com/'	/>
+
+
+		<SCRIPT__contact_form		u='e/s'	/>
+
+
+		<SOCKET__io		u='http://z2:3001'	/>
+	</loc>
+
+<!--	========================	========================	========================	-->
+
+	<main_menu>
+		<pages>
+			<p		name="Home"				u="/"					ico="fa fa-home"		/>
+			<p		name="TTT"				u="/ttt"				ico="fa fa-trophy"		/>
+			<p		name="Info"				u="/pg/info"			ico="fa fa-info"		/>
+		</pages>
+	</main_menu>
+
+<!--	========================	========================	========================	-->
+
+	<header>
+		<head_l_logo	i='images/react_sha.png'		u='/'		/>
+		<site_title		txt='X Tic Tac Toe'				u='/'		/>
+	</header>
+
+<!--	========================	========================	========================	-->
+
+	<footer>
+		<items>
+			<i 		tp='txt'		txt='Copyright © 2016 kisla interactive'	/>
+			<i 		tp='ln'			txt='terms and conditions'		u='pupg/terms-and-conditions'	/>
+			<i 		tp='ln'			txt='privacy'					u='pupg/privacy-policy'	/>
+			<i 		tp='ln'			txt='contact us'				u='contact-us'	/>
+		</items>
+		<foot_msg		txt='A simple Tic Tac Toe game demo built with React.js and Node.js.'	/>
+		<foot_r_logo	i='images/K_logo.png'	u='http://www.kisla.com'	t='_blank'		/>
+	</footer>
+
+
+<!--	========================	========================	========================	-->
+<!--	========================	========================	========================	-->
+
+	<pgs>
+
+
+<!--	========================	========================	========================	-->
+
+		<home		pg_name="Home">
+			<txt>
+			<![CDATA[
+				<div>This is a simple website built with React.js.</div>
+				
+				<div>
+				 view source at  <a href='https://github.com/xims/X-react-starter'>github.com/xims/X-react-starter</a></div>
+
+				<br/>
+				<h4>For demonstration purposes.</h4>
+				<br/>
+
+			]]>
+			</txt>
+			<btns>
+				<b txt='PLAY' u='/ttt' />
+			</btns>
+		</home>
+
+<!--	========================	========================	========================	-->
+
+		<info		pg_name='Info'>
+			<txt>
+			<![CDATA[
+		<section id='info'>
+			<div id='page-container'>
+				<h3>This is a simple example of React.js stack based website</h3>
+				<br/>
+				<h4>Major libraries used:</h4>
+				<ul class='simple_list'>
+					<li>react</li>
+					<li>webpack</li>
+					<li>babel</li>
+					<li>react-router</li>
+					<li>ampersand</li>
+					<li>sass</li>
+					<li>jest</li>
+				</ul>
+
+				<br/>
+				<h3>Configurable with external XML file - <a href="./ws_conf.xml" target='blank'>ws_conf.xml</a></h3>
+
+				<br/><br/>
+				<h2>For demonstration purposes.</h2>
+				<br/>
+
+			</div>
+		</section>
+			]]>
+			</txt>
+			<btns>
+				<b txt='PLAY' u='/ttt' />
+			</btns>
+		</info>
+
+<!--	========================	========================	========================	-->
+
+
+
+		<terms-and-conditions		pg_name='WEBSITE TERMS AND CONDITIONS'>
+			<![CDATA[
+				<p>The Privacy Policy, Information on this website form part of conditions of entry.</p>
+				<p>1. By entering the competition you agree to be bound by these PopUp_page and conditions, and the terms and conditions applicable to the following</p>
+				<p>13. The Promoter is not responsible for any problems or technical malfunction of any telephone network or lines, computer on-line systems, servers, or providers, computer equipment, software, technical problems or traffic congestion on the Internet or at any web site, or any combination thereof, including any injury or damage to participants or any other person's computer related to or resulting from participation.</p>
+			]]>
+		</terms-and-conditions>
+		<privacy-policy		pg_name='Web Site Privacy Policy'>
+			<![CDATA[
+				<p>We are committed to providing and maintaining a safe and secure environment on the internet for everyone. The privacy of any information we collect is important to us.</p>
+
+				<h4>Comments? Questions? Suggestions?</h4>
+				<p>We welcome any suggestions on how to make this a better and safer place for everyone. If you would like to communicate with us about our Privacy Policy, please use ‘contact us’ form.</p>
+			]]>
+		</privacy-policy>
+	</pgs>
+
+<!--
+	========================	========================	========================
+-->
+
+</data>

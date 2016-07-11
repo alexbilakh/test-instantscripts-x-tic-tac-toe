@@ -1,0 +1,261 @@
+.elem_hide { 
+	visibility: hidden;
+	width__: 1px;
+	height: 0px;
+}
+.elem_show {
+	visibility: visible;
+	width__: 1000px;
+	height: 700px;
+}
+.visuallyhidden { 
+	position: absolute; 
+	overflow: hidden; 
+	clip: rect(0 0 0 0); 
+	height: 1px; width: 1px; 
+	margin: -1px; padding: 0; border: 0; 
+}
+.hideaway {
+	position: absolute !important;
+	top: -9999px !important;
+	left: -9999px !important;
+}
+
+header#main_header {
+	width:100%;
+	position: fixed;
+	z-index: 30;
+	top:0;
+	left:0;
+
+	// background-image: url(../../static/images/team-coach-bg.jpg);
+	background-color: #eee;
+	background-size: cover !important;
+	background-position: center center !important;
+	background-repeat: no-repeat !important;
+	background-attachment:fixed;		
+	color: #0038A8;
+
+	.container {
+		height: 100%;
+	}
+
+	#brand {
+		height: 80px;
+		border-bottom:1px solid $pin;
+	
+
+		a.main-site-name {
+			width: 600px;
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 18px;
+			bottom:0;
+			margin-left: 250px;
+			margin-right: 150px;
+			display: block;
+			// color: #fff;
+			font-family: $hdrFont;
+			font-weight: 800;
+			font-size: 35px;
+			text-align: center;
+			color: #0038A8;
+
+		}
+		a.logo-tl {
+			position: absolute;
+			left: 10px;
+			top: 0;
+			height: 75px;
+			width: 154px;
+			left: 30px;
+
+			img {
+				// width: 100%;
+				height: 80px;
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				margin: auto;
+			}
+		}
+
+		nav {
+			position: absolute;
+			right: 30px;
+			top: 20px;
+
+			ul {
+				list-style:none;
+				@extend %clearfix;
+
+				li {
+					float: left;
+					display: block;
+					margin-left: 24px;
+					display:none;
+					display:block;
+
+					a {
+						// color: #fff;
+						font-family: $hdrFont;
+						font-weight: 400;
+						text-transform: uppercase;
+						@include font-size(14px);
+						padding-top: 26px;
+						display: block;
+						background-position: top center;
+						background-repeat:no-repeat;
+						color: #0038A8;
+
+						i {
+							font-family: "FontAwesome";
+							position: absolute;
+							display: block;
+							top: -5px;
+							margin: 10 auto;
+						}
+
+						span.white {
+							background:#fff;
+							color:$colorPrimaryDark;
+						}
+
+						&.menu {
+							// background-image:url(../../static/images/nav-top-menu.svg);
+							background-size: 21px;
+							&:hover,&.active{
+								// background-image:url(../../static/images/nav-top-menu_hover.svg);
+								background-size: 21px;
+							}
+						}						
+					}
+					a.profile {
+						height: 100%;
+						padding-top:0;
+						.my_profile {
+							float: left;
+							text-align: right;
+							margin-right: 15px;
+							// width: 55px;
+							display: inline-block;
+							padding-top: 8px;
+						}
+						.avatar {							
+							display: inline-block;
+							float: right;
+							img {
+								width: 44px;
+								height: 44px;
+								border-radius:50%;
+							}
+						}
+					}
+				}
+				li.showMobile {
+					display: block;
+				}
+			}
+		}
+	}
+
+
+	#msg_bar{
+		position: fixed;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background:#430e8b;
+		color: #fff;
+		@include font-size(15px);
+		line-height: 25px;		
+		font-weight: 300;
+		text-align: center;
+		z-index: 32;
+
+		position: relative;
+		height: auto;
+		line-height: 48px;
+		background:#000;
+
+		.container{
+			position:absolute;
+			top:0;
+			bottom:0;
+			margin:auto;
+			height: 100px;
+			width: 100%;
+
+			position: relative;
+			margin: 0 auto;
+			height: auto;
+			max-width: 1170px;
+		}
+
+		span.one_line {
+			display: inline-block;
+
+		}
+
+		.emphasize {
+			font-weight: 700;
+			font-style: italic;			
+		}
+
+		.exclaim{
+			color:$colorSecondary;
+			@include font-size(23px);
+			font-weight: 700;
+			display: inline-block;
+			margin-right: 15px;
+
+			span{
+				display: inline-block;
+				position:absolute;
+				top:0px;
+			}
+		}
+
+		a.close{
+			position:fixed;
+			right: 15px;
+			top:20px;
+			@include font-size(23px);
+			color:$colorSecondary;
+
+			&:hover {
+				opacity: .9;
+			}
+			&:active {
+				opacity: .8;
+			}
+
+				position:absolute;
+				right: 30px;
+				top:13px;
+		}
+
+		.button {
+			@include button(146px,30px,3px,$colorSecondary,$colorSecondaryDark,#fff);
+			font-family: $hdrFont;
+			@include font-size(12px);
+			margin: 0 auto;
+			margin-top: 20px;
+			display: block;
+
+				display: inline;
+				margin:0 0 0 5px;
+
+			&:active {
+				box-shadow:0px 1px 0px 0px #000;
+				margin-top: 5px;
+				margin-bottom: 0;
+			}
+
+		}
+
+	}
+
+}

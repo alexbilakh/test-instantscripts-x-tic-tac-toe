@@ -1,0 +1,32 @@
+.container {
+	max-width:1230px;
+	margin:0 auto;
+	position:relative;
+	margin-top:0;
+	padding:0 30px;
+}
+
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+
+* {
+  margin: 0;
+}
+html, body {
+  height: 100%;  
+  // overflow:hidden;
+}
+#root {
+	height:100%;
+}
+#main_content{
+	padding-top:90px;
+	padding-bottom:45px;
+	//overflow:scroll;
+	min-height:100%;
+	// overflow:hidden;
+}

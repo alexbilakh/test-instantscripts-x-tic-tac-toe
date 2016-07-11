@@ -1,0 +1,78 @@
+// TRANSITIONS
+// copy ease code from here:: https://matthewlein.com/ceaser/
+// and paste into css like this:: @include transition(all 400ms cubic-bezier(0.175, 0.885, 0.320, 1.275));
+@mixin transition($args...){
+-webkit-transition: $args; 
+   -moz-transition: $args;
+     -o-transition: $args; 
+        transition: $args; 
+
+-webkit-transition-timing-function: $args;
+   -moz-transition-timing-function: $args;
+     -o-transition-timing-function: $args;
+        transition-timing-function: $args;
+}
+
+// FONT SIZES
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+
+// CLEARFIX
+%clearfix {
+  *zoom: 1;
+  &:before, &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+// INPUT
+@mixin textInput($width) {
+  width: $width;
+  background: #fff;
+  border-radius: 7px;
+  border:none;
+  padding:0 18px;
+  color: #888888;
+  font-style: italic;
+  @include font-size(18px);
+  font-weight: 300;
+  height: 46px;
+  line-height: 46px;
+  box-shadow:0px -4px 0px 0px #ebe6f1;
+}
+
+// BUTTON
+@mixin button($width,$height,$shadowDepth,$bgColor,$shadowColor,$textColor){
+	width:$width;
+	height:$height;
+	line-height:$height;
+	text-align:center;
+	border-radius:7px;
+	background:$bgColor;
+	color:$textColor;
+	box-shadow:0px $shadowDepth 0px 0px $shadowColor;
+	border:none;
+	cursor:pointer;
+	@include transition(.1s ease-in-out);	
+	
+	&:hover {
+		opacity:.9;		
+	}
+
+	&:active {
+		box-shadow:0px 1px 0px 0px $shadowColor;
+		margin-top: 25px;
+		margin-bottom: 15px;
+	}
+}

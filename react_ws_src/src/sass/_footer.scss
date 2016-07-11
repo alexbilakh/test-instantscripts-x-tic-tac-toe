@@ -1,0 +1,71 @@
+footer {
+	width:100%;
+	height:50px;
+	position: fixed;
+	z-index: 20;
+	bottom:0;
+	left:0;
+	background:$grey;
+	display:block;
+
+	nav {
+		position: absolute;
+		left: 30px;	
+		height: 100%;
+
+		ul {
+			list-style-type: none;
+			margin: 0;
+			padding:0;
+
+			li {
+				display: inline;
+				height: 100%;
+				line-height: 50px;
+				text-transform: uppercase;
+				font-size: .65em;
+				margin-right: 10px;
+				color: #6c6c6c;
+
+				a {
+					color: #6c6c6c;
+					text-decoration: none;
+				}
+				a:hover {
+					color: #333;
+				}
+			}
+		}	
+	}
+
+	.foot_message {
+		position: absolute;
+		/*left: 30px;	*/
+		/*height: 100%;*/
+		/*right: 30px;*/
+
+		margin: 15px 110px auto 490px;
+		/*border-style: dashed;*/
+
+		font-size: .75em;
+		color: #6c6c6c;
+		text-align: center;
+	}
+
+	.foot-r-logo {
+		position: absolute;
+		right: 30px;
+		top: 0;
+		height: 50px;
+		width: 60px;
+
+		img {
+			margin: auto;
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom:0;
+			width: 100%;
+		}
+	}
+}

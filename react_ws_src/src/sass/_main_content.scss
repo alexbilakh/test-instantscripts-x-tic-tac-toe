@@ -1,0 +1,78 @@
+.main_container {
+	max-width: 700px;
+	margin: 50px auto;
+	position:relative;
+	padding:0 30px;
+
+	color: #333;
+	font-family: $bodyFont;
+	@include font-size(16px);
+
+	.button {
+		@include button(179px,50px,4px,$colorSecondary,$colorSecondaryDark,#fff);
+		font-family: $hdrFont;
+		@include font-size(16px);
+		margin-top:24px;		
+	}
+
+	i {
+		font-family: "FontAwesome";
+	}
+
+	a {
+		// color: #ccc;
+		font-weight: 800;
+		font-style: italic;			
+
+	}
+
+	hr {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+
+}
+
+
+.simple_list{
+	list-style-type: none;
+	padding: 12px;
+
+	li {
+		margin: 5px;
+		// @include font-size(18px);
+
+		label {
+			padding-left: 20px;
+		} 
+	}
+}
+
+.types_selector{
+	list-style-type: none;
+	padding: 20px;
+
+	li {
+		margin: 15px;
+		@include font-size(20px);
+
+		label {
+			padding-left: 10px;
+		} 
+	}
+}
+
+
+
+	#input_basket_total {
+		color: #000;
+		margin: 15px;
+		width: 200px;
+		height: 50px;
+		padding: 5px 20px;
+		@include font-size(30px);
+		appearance: none;
+		box-shadow: none;
+		border-radius: 5px;
+	}
+
