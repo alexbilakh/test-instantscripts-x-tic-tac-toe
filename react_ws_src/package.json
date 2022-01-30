@@ -59,7 +59,7 @@
     "file-loader": "^0.9.0",
     "imports-loader": "^0.6.5",
     "jest-cli": "^13.2.3",
-    "node-sass": "^3.8.0",
+    "node-sass": "^7.0.1",
     "proxy-middleware": "^0.15.0",
     "react-addons-test-utils": "^15.2.0",
     "rimraf": "^2.5.3",
