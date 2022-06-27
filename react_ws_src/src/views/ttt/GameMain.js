@@ -17,15 +17,15 @@ export default class SetName extends Component {
 		 *      Can increase performance of checking if winner or finding the best move
 		*/
 		this.win_mappings = {
-			c1: { c2: "c3", c5: "c9", c4: "c7", c9: "c5", c3: "c2", c7: "c4" },
-			c2: { c1: "c3", c3: "c1", c5: "c8", c8: "c5" },
-			c3: { c2: "c1", c5: "c7", c6: "c9", c7: "c5", c1: "c2", c9: "c6" },
-			c4: { c1: "c7", c7: "c1", c5: "c6", c6: "c5" },
-			c5: { c1: "c9", c9: "c1", c3: "c7", c7: "c3", c4: "c6", c6: "c4", c2: "c8", c8: "c2" },
-			c6: { c3: "c9", c9: "c3", c5: "c4", c4: "c5" },
-			c7: { c5: "c3", c4: "c1", c8: "c9", c3: "c5", c9: "c8", c1: "c4" },
-			c8: { c7: "c9", c9: "c7", c5: "c2", c2: "c5" },
-			c9: { c5: "c1", c8: "c7", c6: "c3", c1: "c5", c7: "c8", c3: "c6" },
+			c1: { c2: "c3", c5: "c9", c4: "c7" },
+			c2: { c1: "c3", c5: "c8" },
+			c3: { c2: "c1", c5: "c7", c6: "c9" },
+			c4: { c1: "c7", c6: "c5" },
+			c5: { c1: "c9", c3: "c7", c4: "c6", c2: "c8" },
+			c6: { c3: "c9", c4: "c5" },
+			c7: { c5: "c3", c4: "c1", c8: "c9" },
+			c8: { c7: "c9", c2: "c5" },
+			c9: { c5: "c1", c8: "c7", c6: "c3" },
 		};
 
 
@@ -385,14 +385,17 @@ export default class SetName extends Component {
 		const empty_cells = this.find_empty_cells();
 		const best_cell = {
 			id: "",
-			recommendation: 0
+			total_recommendation: 0,
+			top_recommendation: 0,
 		};
 
 		empty_cells.forEach(cell_id => {
-			let cell_recommendation = 0;
+			let top_cell_recommendation = 0;
+			let total_cell_recommendation = 0;
 			const cell_mappings = this.win_mappings[cell_id];
 
 			Object.keys(cell_mappings).forEach(second_cell_id => {
+				let current_cell_recommendation = 0;
 				const third_cell_id = cell_mappings[second_cell_id];
 				
 				// Check for matching
@@ -400,22 +403,32 @@ export default class SetName extends Component {
 					cell_vals[second_cell_id] !== enemyCellValue
 					&& cell_vals[third_cell_id] !== enemyCellValue
 				) {
-					cell_recommendation += cell_vals[second_cell_id] ? 3 : 1;
-					cell_recommendation += cell_vals[third_cell_id] ? 3 : 1;
+					current_cell_recommendation += cell_vals[second_cell_id] ? 3 : 1;
+					current_cell_recommendation += cell_vals[third_cell_id] ? 3 : 1;
 				} else { // Check against enemy
 					// if both cells are enemy's, fill his last pair cell
 					if (
 						cell_vals[second_cell_id] === enemyCellValue
 						&& cell_vals[third_cell_id] === enemyCellValue
 					) {
-						cell_recommendation += 5;
+						current_cell_recommendation += 5;
 					}
 				}
+
+				total_cell_recommendation += current_cell_recommendation;
+				if (current_cell_recommendation > top_cell_recommendation) top_cell_recommendation = current_cell_recommendation;
 			});
 
-			if (cell_recommendation >= best_cell['recommendation']) {
+			if (
+				top_cell_recommendation > best_cell['top_recommendation']
+				|| (
+					top_cell_recommendation == best_cell['top_recommendation']
+					&& total_cell_recommendation >= best_cell['total_recommendation']
+				)
+			) {
 				best_cell['id'] = cell_id;
-				best_cell['recommendation'] = cell_recommendation;
+				best_cell['top_recommendation'] = top_cell_recommendation;
+				best_cell['total_recommendation'] = total_cell_recommendation;
 			}
 		});
 		return best_cell['id'];
