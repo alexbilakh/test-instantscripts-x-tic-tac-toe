@@ -12,18 +12,22 @@ export default class SetName extends Component {
 	constructor (props) {
 		super(props)
 
-		this.win_sets = [
-			['c1', 'c2', 'c3'],
-			['c4', 'c5', 'c6'],
-			['c7', 'c8', 'c9'],
-
-			['c1', 'c4', 'c7'],
-			['c2', 'c5', 'c8'],
-			['c3', 'c6', 'c9'],
-
-			['c1', 'c5', 'c9'],
-			['c3', 'c5', 'c7']
-		]
+		/**
+		 * @dev Cell number mapping hash table that can be winner pair
+		 *      Using hash table instead of array lists for better performance.
+		 *      Can increase performance of checking if winner or finding the best move
+		*/
+		this.win_mappings = {
+			c1: { c2: "c3", c5: "c9", c4: "c7", c9: "c5", c3: "c2", c7: "c4" },
+			c2: { c1: "c3", c3: "c1", c5: "c8", c8: "c5" },
+			c3: { c2: "c1", c5: "c7", c6: "c9", c7: "c5", c1: "c2", c9: "c6" },
+			c4: { c1: "c7", c7: "c1", c5: "c6", c6: "c5" },
+			c5: { c1: "c9", c9: "c1", c3: "c7", c7: "c3", c4: "c6", c6: "c4", c2: "c8", c8: "c2" },
+			c6: { c3: "c9", c9: "c3", c5: "c4", c4: "c5" },
+			c7: { c5: "c3", c4: "c1", c8: "c9", c3: "c5", c9: "c8", c1: "c4" },
+			c8: { c7: "c9", c9: "c7", c5: "c2", c2: "c5" },
+			c9: { c5: "c1", c8: "c7", c6: "c3", c1: "c5", c7: "c8", c3: "c6" },
+		};
 
 
 		if (this.props.game_type != 'live')
@@ -186,7 +190,7 @@ export default class SetName extends Component {
 
 		this.state.cell_vals = cell_vals
 
-		this.check_turn()
+		this.check_turn(cell_id)
 	}
 
 //	------------------------	------------------------	------------------------
@@ -214,7 +218,7 @@ export default class SetName extends Component {
 
 		this.state.cell_vals = cell_vals
 
-		this.check_turn()
+		this.check_turn(c)
 	}
 
 
@@ -240,7 +244,7 @@ export default class SetName extends Component {
 
 		this.state.cell_vals = cell_vals
 
-		this.check_turn()
+		this.check_turn(cell_id)
 	}
 
 //	------------------------	------------------------	------------------------
@@ -264,30 +268,29 @@ export default class SetName extends Component {
 
 		this.state.cell_vals = cell_vals
 
-		this.check_turn()
+		this.check_turn(data.cell_id)
 	}
 
 //	------------------------	------------------------	------------------------
 //	------------------------	------------------------	------------------------
 //	------------------------	------------------------	------------------------
 
-	check_turn () {
+	/**
+	 * @dev check the next turn
+	 * @modified Added a parameter (lastMovedCellId)
+	 * @param { string } lastMovedCellId last moved cell id
+	 * @return { void }
+	*/
+	check_turn (lastMovedCellId) {
 
 		const { cell_vals } = this.state
 
-		let win = false
-		let set
+		let set = this.check_winner(lastMovedCellId);
+		let win = Boolean(set);
 		let fin = true
 
 		if (this.props.game_type!='live')
 			this.state.game_stat = 'Play'
-
-
-		for (let i=0; !win && i<this.win_sets.length; i++) {
-			set = this.win_sets[i]
-			if (cell_vals[set[0]] && cell_vals[set[0]]==cell_vals[set[1]] && cell_vals[set[0]]==cell_vals[set[2]])
-				win = true
-		}
 
 
 		for (let i=1; i<=9; i++) 
@@ -339,5 +342,30 @@ export default class SetName extends Component {
 	}
 
 
+	/**
+	 * @dev Check if the last mover is winner
+	 * @param { string } lastMovedCellId : last moved cell id
+	 * @return { string[] | false } Array of win set string
+	*/
+	check_winner(lastMovedCellId) {
+		const { cell_vals } = this.state;
+		const lastCellMappings = this.win_mappings[lastMovedCellId];
+		const lastCellAdjacents = Object.keys(lastCellMappings);
 
+		// Maximum 4 loops
+		for (let i=0; i < lastCellAdjacents.length; i++) {
+			// Check if winner
+			if (
+				cell_vals[lastMovedCellId] === cell_vals[lastCellAdjacents[i]]
+				&& cell_vals[lastMovedCellId] === cell_vals[lastCellMappings[lastCellAdjacents[i]]]
+			) {
+				return [
+					lastMovedCellId,
+					lastCellAdjacents[i],
+					lastCellMappings[lastCellAdjacents[i]]
+				];
+			}
+		}
+		return false;
+	}
 }
