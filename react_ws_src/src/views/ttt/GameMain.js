@@ -4,7 +4,6 @@ import io from 'socket.io-client'
 
 import TweenMax from 'gsap'
 
-import rand_arr_elem from '../../helpers/rand_arr_elem'
 import rand_to_fro from '../../helpers/rand_to_fro'
 
 export default class SetName extends Component {
@@ -198,14 +197,7 @@ export default class SetName extends Component {
 	turn_comp () {
 
 		let { cell_vals } = this.state
-		let empty_cells_arr = []
-
-
-		for (let i=1; i<=9; i++) 
-			!cell_vals['c'+i] && empty_cells_arr.push('c'+i)
-		// console.log(cell_vals, empty_cells_arr, rand_arr_elem(empty_cells_arr))
-
-		const c = rand_arr_elem(empty_cells_arr)
+		const c = this.find_best_move('o');
 		cell_vals[c] = 'o'
 
 		TweenMax.from(this.refs[c], 0.7, {opacity: 0, scaleX:0, scaleY:0, ease: Power4.easeOut})
@@ -367,5 +359,65 @@ export default class SetName extends Component {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * @dev Find empty cells
+	 * @return { string[] } Array of cell numbers
+	*/
+	find_empty_cells() {
+		const empty_cells = [];
+		for (let i=1; i<=9; i++) {
+			const cellNumber = `c${i}`;
+			if (!this.state.cell_vals.hasOwnProperty(cellNumber)) empty_cells.push(cellNumber);
+		}
+		return empty_cells;
+	}
+
+	/**
+	 * @dev Find the best move
+	 * @param { string } targetCellValue target cell value (x or o) of who is finding best move
+	 * @return { string } cell number
+	*/
+	find_best_move(targetCellValue = 'x') {
+		const enemyCellValue = targetCellValue === 'x' ? 'o' : 'x';
+		const { cell_vals } = this.state;
+		const empty_cells = this.find_empty_cells();
+		const best_cell = {
+			id: "",
+			recommendation: 0
+		};
+
+		empty_cells.forEach(cell_id => {
+			let cell_recommendation = 0;
+			const cell_mappings = this.win_mappings[cell_id];
+
+			Object.keys(cell_mappings).forEach(second_cell_id => {
+				const third_cell_id = cell_mappings[second_cell_id];
+				
+				// Check for matching
+				if (
+					cell_vals[second_cell_id] !== enemyCellValue
+					&& cell_vals[third_cell_id] !== enemyCellValue
+				) {
+					cell_recommendation += cell_vals[second_cell_id] ? 3 : 1;
+					cell_recommendation += cell_vals[third_cell_id] ? 3 : 1;
+				} else { // Check against enemy
+					// if both cells are enemy's, fill his last pair cell
+					if (
+						cell_vals[second_cell_id] === enemyCellValue
+						&& cell_vals[third_cell_id] === enemyCellValue
+					) {
+						cell_recommendation += 5;
+					}
+				}
+			});
+
+			if (cell_recommendation >= best_cell['recommendation']) {
+				best_cell['id'] = cell_id;
+				best_cell['recommendation'] = cell_recommendation;
+			}
+		});
+		return best_cell['id'];
 	}
 }
